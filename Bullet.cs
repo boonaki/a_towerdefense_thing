@@ -66,6 +66,8 @@ public class Bullet : MonoBehaviour
 
 
     }
+    
+    //----------------- I've tried putting this into HitTarget(), in multiple forms but to no avail...
    
     public void OnCollisionEnter(Collision collision)
     {
