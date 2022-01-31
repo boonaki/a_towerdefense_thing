@@ -25,6 +25,7 @@ public class Tracking : MonoBehaviour
     public GameObject smokeRing;
     public Transform firePoint;
     private ObjectPool<GameObject> bulletpool;
+    public GameObject nearestEnemy;
 
 
 
@@ -67,7 +68,7 @@ public class Tracking : MonoBehaviour
         GameObject[] enemies = GameObject.FindGameObjectsWithTag(enemyTag); //finds all enemies, stores in array
 
         float shortestroute = Mathf.Infinity; //shortest route
-        GameObject nearestEnemy = null; //enemy with shortest route
+        nearestEnemy = null; //enemy with shortest route
 
         foreach (GameObject enemy in enemies) //for every enemy in enemies array...
         {
@@ -84,12 +85,12 @@ public class Tracking : MonoBehaviour
         if (nearestEnemy != null && shortestroute <= range)
         {
             target = nearestEnemy.transform;
-            Debug.Log("target found");
+            //Debug.Log("target found");
         }
         else
         {
             target = null;
-            Debug.Log("target lost");
+            //Debug.Log("target lost");
         }
     }
 
@@ -125,7 +126,7 @@ public class Tracking : MonoBehaviour
         //GameObject projectile = ObjectPool.SharedInstance.getPooledObject();
         if (projectile != null)
         {
-            Debug.Log("spawned bullet");
+            //Debug.Log("spawned bullet");
             projectile.transform.position = firePoint.position;
             projectile.transform.rotation = firePoint.rotation;
             
@@ -141,17 +142,17 @@ public class Tracking : MonoBehaviour
 
 
 
-        if (projectile != null)
+        if (projectile != null && nearestEnemy != null)
         {
-            Debug.Log("seeking");
-            bullet.Seek(target);
+            //Debug.Log("seeking");
+            bullet.Seek(target, nearestEnemy);
         }
 
         Destroy(smoke, 2f);
 
     }
 
-    void OnDrawGizmosSelected()
+    void OnDrawGizmosSelected() //draws a red circle around turret indicating its range
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, range);

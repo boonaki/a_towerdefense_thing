@@ -13,15 +13,17 @@ public class Bullet : MonoBehaviour
 
 
     private Transform target;
-    //private Rigidbody bullet_rb;
+    private Rigidbody bullet_rb;
     //private Rigidbody bullet_clone;
     private Vector3 dir;
+    private Rigidbody selected;
 
    
 
-    public void Seek(Transform _target) //calls target position found in Tracking script
+    public void Seek(Transform _target, GameObject nearestEnemy) //calls target position found in Tracking script
     {
         target = _target;
+        selected = nearestEnemy.GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -52,6 +54,7 @@ public class Bullet : MonoBehaviour
         var impact = Instantiate(impacteffect, transform.position, transform.rotation);
         Debug.Log("we shot someone");
         Destroy(impact, .5f);
+        selected.AddForce(dir.normalized.x * expl_power, (dir.normalized.y + angle) * expl_power, dir.normalized.z * expl_power, ForceMode.Impulse);
         gameObject.SetActive(false);
         
         Damage();
@@ -66,9 +69,7 @@ public class Bullet : MonoBehaviour
 
 
     }
-    
-    //----------------- I've tried putting this into HitTarget(), in multiple forms but to no avail...
-   
+   /*
     public void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Enemy" || collision.gameObject.tag == "Terrain") 
@@ -81,5 +82,5 @@ public class Bullet : MonoBehaviour
         return;
 
     }
-    
+    */
 }
