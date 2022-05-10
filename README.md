@@ -1,4 +1,13 @@
 # a_towerdefense_thing
-a collection of my scripts for my game
+a public collection of my scripts for an untitled project
 
-Just like my other repositories unfortunately this is still unstructured, but I'm working on it. This is my first game so I'm just kinda going
+VERSION 0.1.2
+    - Added touch functionality for mobile deployment
+    - Added camera movement
+    - Fixed inconsistent collision issues between fish and bullet
+    - Fixed inaccurate physics for fish
+    - Improved memory efficiency
+    - Improved performance on mobile
+    - Remodeled main tower
+    - Remodeled test turret
+
